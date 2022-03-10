@@ -24,14 +24,14 @@ namespace cunor.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Estudiante>>> GetEstudiante()
         {
-            return await _context.Estudiante.ToListAsync();
+            return await _context.Estudiantes.ToListAsync();
         }
 
         // GET: api/Estudiantes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Estudiante>> GetEstudiante(int id)
         {
-            var estudiante = await _context.Estudiante.FindAsync(id);
+            var estudiante = await _context.Estudiantes.FindAsync(id);
 
             if (estudiante == null)
             {
@@ -46,7 +46,7 @@ namespace cunor.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEstudiante(int id, Estudiante estudiante)
         {
-            if (id != estudiante.cod_estudiante)
+            if (id != estudiante.CodEstudiante)
             {
                 return BadRequest();
             }
@@ -77,23 +77,23 @@ namespace cunor.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Estudiante>> PostEstudiante(Estudiante estudiante)
         {
-            _context.Estudiante.Add(estudiante);
+            _context.Estudiantes.Add(estudiante);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEstudiante", new { id = estudiante.cod_estudiante }, estudiante);
+            return CreatedAtAction("GetEstudiante", new { id = estudiante.CodEstudiante }, estudiante);
         }
 
         // DELETE: api/Estudiantes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEstudiante(int id)
         {
-            var estudiante = await _context.Estudiante.FindAsync(id);
+            var estudiante = await _context.Estudiantes.FindAsync(id);
             if (estudiante == null)
             {
                 return NotFound();
             }
 
-            _context.Estudiante.Remove(estudiante);
+            _context.Estudiantes.Remove(estudiante);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace cunor.api.Controllers
 
         private bool EstudianteExists(int id)
         {
-            return _context.Estudiante.Any(e => e.cod_estudiante == id);
+            return _context.Estudiantes.Any(e => e.CodEstudiante == id);
         }
     }
 }

@@ -1,18 +1,15 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace cunor.api.Models;
-
-[Table("colaborador", Schema="public")]
-public class Colaborador{
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid cod_colaborador {get; set;}
-    public string nombres {get; set;}
-    public string apellidos {get; set;}
-    public string direccion {get; set;}
-    public string telefono {get; set;}
-    public string correo {get; set;}
-
-
+namespace cunor.api.Models
+{
+    public partial class Colaborador
+    {
+        public Guid CodColaborador { get; set; }
+        public string Nombres { get; set; }
+        public string Apellidos { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+        public string Correo { get; set; }
+    }
 }

@@ -1,12 +1,12 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace cunor.api.Models;
-
-[Table("puesto", Schema="public")]
-public class Puesto{
-    [Key]
-    public string cod_puesto {get; set;}
-    public string nombre {get; set;}
-    public double salario {get; set;}
+namespace cunor.api.Models
+{
+    public partial class Puesto
+    {
+        public Guid CodPuesto { get; set; }
+        public string Nombre { get; set; }
+        public decimal? Salario { get; set; }
+    }
 }

@@ -24,14 +24,14 @@ namespace cunor.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Colaborador>>> GetColaborador()
         {
-            return await _context.Colaborador.ToListAsync();
+            return await _context.Colaboradors.ToListAsync();
         }
 
         // GET: api/Colaborador/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Colaborador>> GetColaborador(string id)
         {
-            var colaborador = await _context.Colaborador.FindAsync(id);
+            var colaborador = await _context.Colaboradors.FindAsync(id);
 
             if (colaborador == null)
             {
@@ -46,7 +46,7 @@ namespace cunor.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutColaborador(Guid id, Colaborador colaborador)
         {
-            if (id != colaborador.cod_colaborador)
+            if (id != colaborador.CodColaborador)
             {
                 return BadRequest();
             }
@@ -77,14 +77,14 @@ namespace cunor.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Colaborador>> PostColaborador(Colaborador colaborador)
         {
-            _context.Colaborador.Add(colaborador);
+            _context.Colaboradors.Add(colaborador);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (ColaboradorExists(colaborador.cod_colaborador))
+                if (ColaboradorExists(colaborador.CodColaborador))
                 {
                     return Conflict();
                 }
@@ -94,20 +94,20 @@ namespace cunor.api.Controllers
                 }
             }
 
-            return CreatedAtAction("GetColaborador", new { id = colaborador.cod_colaborador }, colaborador);
+            return CreatedAtAction("GetColaborador", new { id = colaborador.CodColaborador }, colaborador);
         }
 
         // DELETE: api/Colaborador/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteColaborador(string id)
         {
-            var colaborador = await _context.Colaborador.FindAsync(id);
+            var colaborador = await _context.Colaboradors.FindAsync(id);
             if (colaborador == null)
             {
                 return NotFound();
             }
 
-            _context.Colaborador.Remove(colaborador);
+            _context.Colaboradors.Remove(colaborador);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -115,7 +115,7 @@ namespace cunor.api.Controllers
 
         private bool ColaboradorExists(Guid id)
         {
-            return _context.Colaborador.Any(e => e.cod_colaborador == id);
+            return _context.Colaboradors.Any(e => e.CodColaborador == id);
         }
     }
 }

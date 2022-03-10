@@ -8,6 +8,10 @@
 -- Target DBMS : PostgreSQL 8.0
 --
 
+-- DDL - Data Definition Language
+-- DML - Data Manipulation Language
+-- DCL - Data Control Language
+
 -- 
 -- TABLE: actor 
 --
@@ -17,7 +21,7 @@ CREATE TABLE actor(
     nombre              character varying(75),
     sexo                character varying(75),
     cod_nacionalidad    integer        NOT NULL,
-    CONSTRAINT "PK2" PRIMARY KEY (cod_actor)
+    CONSTRAINT "pk_actor" PRIMARY KEY (cod_actor)
 )
 ;
 
@@ -34,7 +38,7 @@ CREATE TABLE alquiler(
     cod_ejemplar      integer        NOT NULL,
     cod_cliente       integer        NOT NULL,
     cod_pelicula      integer        NOT NULL,
-    CONSTRAINT "PK9" PRIMARY KEY (cod_alquiler)
+    CONSTRAINT "pk_alquiler" PRIMARY KEY (cod_alquiler)
 )
 ;
 
@@ -51,7 +55,7 @@ CREATE TABLE cliente(
     dni                 character varying(75),
     direccion           character varying(75),
     telefono            character varying(75),
-    CONSTRAINT "PK8" PRIMARY KEY (cod_cliente)
+    CONSTRAINT "pk_cliente" PRIMARY KEY (cod_cliente)
 )
 ;
 
@@ -69,7 +73,7 @@ CREATE TABLE director(
     fec_actualizacion    timestamp,
     usuario              varchar(75),
     estado               integer,
-    CONSTRAINT "PK5" PRIMARY KEY (cod_director)
+    CONSTRAINT "pk_director" PRIMARY KEY (cod_director)
 )
 ;
 
@@ -83,7 +87,7 @@ CREATE TABLE ejemplar(
     cod_ejemplar           serial    NOT NULL,
     cod_pelicula           integer       NOT NULL,
     cod_estado_ejemplar    integer       NOT NULL,
-    CONSTRAINT "PK6" PRIMARY KEY (cod_ejemplar, cod_pelicula)
+    CONSTRAINT "pk_ejemplar" PRIMARY KEY (cod_ejemplar, cod_pelicula)
 )
 ;
 
@@ -96,7 +100,7 @@ CREATE TABLE ejemplar(
 CREATE TABLE estado_ejemplar(
     cod_estado_ejemplar    serial     NOT NULL,
     nombre                 character varying(75),
-    CONSTRAINT "PK7" PRIMARY KEY (cod_estado_ejemplar)
+    CONSTRAINT "pk_estado_ejemplar" PRIMARY KEY (cod_estado_ejemplar)
 )
 ;
 
@@ -109,7 +113,7 @@ CREATE TABLE estado_ejemplar(
 CREATE TABLE nacionalidad(
     cod_nacionalidad    serial         NOT NULL,
     nombre              varchar(150),
-    CONSTRAINT "PK10" PRIMARY KEY (cod_nacionalidad)
+    CONSTRAINT "pk_nacionalidad" PRIMARY KEY (cod_nacionalidad)
 )
 ;
 
@@ -126,7 +130,7 @@ CREATE TABLE pelicula(
     cod_director        integer        NOT NULL,
     cod_nacionalidad    integer        NOT NULL,
     cod_productora      integer        NOT NULL,
-    CONSTRAINT "PK1" PRIMARY KEY (cod_pelicula)
+    CONSTRAINT "pk_pelicula" PRIMARY KEY (cod_pelicula)
 )
 ;
 
@@ -139,7 +143,7 @@ CREATE TABLE pelicula(
 CREATE TABLE productora(
     cod_productora    serial         NOT NULL,
     nombre            varchar(150),
-    CONSTRAINT "PK11" PRIMARY KEY (cod_productora)
+    CONSTRAINT "pk_productora" PRIMARY KEY (cod_productora)
 )
 ;
 
@@ -154,7 +158,7 @@ CREATE TABLE reparto(
     cod_pelicula      integer       NOT NULL,
     cod_actor         integer       NOT NULL,
     cod_tipo_actor    integer       NOT NULL,
-    CONSTRAINT "PK4" PRIMARY KEY (cod_reparto, cod_pelicula, cod_actor, cod_tipo_actor)
+    CONSTRAINT "pk_reparto" PRIMARY KEY (cod_reparto, cod_pelicula, cod_actor, cod_tipo_actor)
 )
 ;
 
@@ -167,7 +171,7 @@ CREATE TABLE reparto(
 CREATE TABLE tipo_actor(
     cod_tipo_actor    serial     NOT NULL,
     nombre            character varying(75),
-    CONSTRAINT "PK3" PRIMARY KEY (cod_tipo_actor)
+    CONSTRAINT "pk_tipo_actor" PRIMARY KEY (cod_tipo_actor)
 )
 ;
 

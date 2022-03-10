@@ -24,14 +24,14 @@ namespace cunor.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Puesto>>> GetPuesto()
         {
-            return await _context.Puesto.ToListAsync();
+            return await _context.Puestos.ToListAsync();
         }
 
         // GET: api/Puestos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Puesto>> GetPuesto(string id)
         {
-            var puesto = await _context.Puesto.FindAsync(id);
+            var puesto = await _context.Puestos.FindAsync(id);
 
             if (puesto == null)
             {
@@ -46,7 +46,7 @@ namespace cunor.api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPuesto(string id, Puesto puesto)
         {
-            if (id != puesto.cod_puesto)
+            if (String.IsNullOrEmpty(puesto.CodPuesto.ToString()))
             {
                 return BadRequest();
             }
@@ -77,14 +77,14 @@ namespace cunor.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Puesto>> PostPuesto(Puesto puesto)
         {
-            _context.Puesto.Add(puesto);
+            _context.Puestos.Add(puesto);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PuestoExists(puesto.cod_puesto))
+                if (PuestoExists(puesto.CodPuesto.ToString()))
                 {
                     return Conflict();
                 }
@@ -94,20 +94,20 @@ namespace cunor.api.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPuesto", new { id = puesto.cod_puesto }, puesto);
+            return CreatedAtAction("GetPuesto", new { id = puesto.CodPuesto }, puesto);
         }
 
         // DELETE: api/Puestos/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePuesto(string id)
         {
-            var puesto = await _context.Puesto.FindAsync(id);
+            var puesto = await _context.Puestos.FindAsync(id);
             if (puesto == null)
             {
                 return NotFound();
             }
 
-            _context.Puesto.Remove(puesto);
+            _context.Puestos.Remove(puesto);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -115,7 +115,7 @@ namespace cunor.api.Controllers
 
         private bool PuestoExists(string id)
         {
-            return _context.Puesto.Any(e => e.cod_puesto == id);
+            return _context.Puestos.Any(e => e.CodPuesto.ToString() == id);
         }
     }
 }

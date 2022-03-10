@@ -20,23 +20,23 @@ public class CursosController : ControllerBase
     [HttpGet]
     public IEnumerable<Curso> Get()
     {
-        return _context.Curso.ToArray();
+        return _context.Cursos.ToArray();
     }
 
     [HttpPost]
     public void Add(Curso curso){
-        _context.Curso.Add(curso);
+        _context.Cursos.Add(curso);
         _context.SaveChanges();
     }
 
     [HttpPut]
     public void Update(Curso curso){
-        var item = _context.Curso.Find(curso.cod_curso);
+        var item = _context.Cursos.Find(curso.CodCurso);
 
         if (item != null){
-            item.nombre = curso.nombre;
-            item.descripcion = curso.descripcion;
-            item.carrera = curso.carrera;
+            item.Nombre = curso.Nombre;
+            item.Descripcion = curso.Descripcion;
+            item.Carrera = curso.Carrera;
             _context.Entry(item).State = EntityState.Modified;
             _context.SaveChanges();
         }
@@ -44,7 +44,7 @@ public class CursosController : ControllerBase
 
     [HttpDelete]
     public void Delete(int id){
-        var item = _context.Curso.Find(id);
+        var item = _context.Cursos.Find(id);
 
         if (item != null){
             _context.Entry(item).State = EntityState.Deleted;
